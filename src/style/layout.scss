@@ -1,0 +1,31 @@
+// A형 : 1168*621 / B형 : 1818*720 / C형 : 1816*900
+
+
+@mixin aSize {
+
+}
+
+
+@media screen and (max-width: 1818px) {
+  #app {
+    width: 1818px;
+    height: 720px;
+    background-image: url("~@/images/bg/BG_basic.png");
+    color: white;
+  }
+  .snb {
+    width: 330px;
+  }
+}
+
+@media screen and (min-width: 1818px) {
+  #app {
+    width: 1818px;
+    height: 900px;
+    background-image: url("~@/images/bg/BG.png");
+    color: white;
+  }
+  .snb {
+    width: 360px;
+  }
+}

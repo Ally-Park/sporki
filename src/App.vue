@@ -1,32 +1,52 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <SideMenu @otherSports="()=>{ showSetting = true }"></SideMenu>
+    <router-view @gameListPopup="() => { showAllGame = true }"></router-view>
+    <GameListPopup v-if="showAllGame" @close="() => { showAllGame = false }"></GameListPopup>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import SideMenu from '@/components/sideTab/SideMenu.vue'
+import GameListPopup from './components/popup/GameListPopup.vue'
+// import * as types  from '@/store/storeTypes'
+// import $apis from '@/apis' 
+// import Game from '@/js/Game'
+// import SportItems from './sports/SportItems'
 
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+  components: {
+    SideMenu,
+    GameListPopup
+  },
+  data () {
+    return {
+      showSetting: true,
+      showAllGame: false
+    }
+  },
+  created () {
+    // this.$router.push('/home').catch(() => {})
+  },
+  methods: {
+    onClick () {
+      this.showSetting = false
+    },
+    gameListPopupHandler () {
+      this.showAllGame = true
     }
   }
+}
+</script>
+
+<style lang="scss">
+@import url('./style/main.scss');
+#app {
+  position: absolute;
+  top: 0;
+  overflow: hidden  ;
+  // background-color: antiquewhite;
+  box-sizing: border-box;
+  padding-left: 118px; // indicator
 }
 </style>
