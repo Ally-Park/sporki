@@ -1,21 +1,19 @@
 <template>
   <div class="live-page">
-    <div class="header">
-      <p>생중계 영상</p>
-      <button class="league-btn">KBO</button>
-    </div>
     <div class="content">
-      <div class="thumnail">
-        <NoGame v-if="isExistLiveSchedule"></NoGame>
-        <VideoThumnail v-if="checkInit" :thumnail="thumnailContent" :currentSport="getCurrentSports"></VideoThumnail>
+      <div class="title">
+        <p>생중계 영상</p>
+        <button class="league-btn">KBO</button>
       </div>
-      <div class="side-box">
-        <div class="other-game">
-          <span>경기 목록</span>
-          <button @click="$emit('gameListPopup')">버튼</button>
-        </div>
-        <GameCardList  v-if="checkInit" :games="gameList" @click="onClick"></GameCardList>
+      <VideoThumnail v-if="checkInit" :thumnail="thumnailContent" :currentSport="getCurrentSports"></VideoThumnail>
+      <NoGame v-if="isExistLiveSchedule"></NoGame>
+    </div>
+    <div class="side-box" v-if="checkInit">
+      <div class="other-game">
+        <span>경기 목록</span>
+        <button @click="$emit('gameListPopup')">버튼</button>
       </div>
+      <GameCardList  :games="gameList" @click="onClick"></GameCardList>
     </div>
   </div>
 </template>
@@ -97,25 +95,35 @@ export default {
 <style lang="scss" scoped>
 .live-page {
   float: left;
-  // width: 100%;
+  display: flex;
   height: 100%;
-  .header {
-    height: 100px;
-    display: flex;
-    align-items: center;  
-    p {
-      font-size: 30px;
-    }
-    .league-btn {
-      color: white;
-      font-size: 30px;
-    }
-  }
+  width: calc(100% - 410px);
   .content {
     display: flex;
-    height: 610px;
+    flex-direction: column;
+    height: 100%;
+    .title {
+      height: 140px;
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      p {
+        font-size: 50px;
+        margin-right: 40px;
+      }
+      .league-btn {
+        width: 166px;
+        height: 70px;
+        font-weight: bold;
+        color: rgba($color: #fff, $alpha: 0.4); // TODO: 리그 여러개인 경우 색상 변경 필요
+        font-size: 30px;
+        border-radius: 8px;
+        border: solid 2px rgba(255, 255, 255, 0.1);
+        background-color: rgba(56, 57, 63, 0.2);
+      }
+    }
     .thumnail {
-      width: 1000px;
+      width: fit-content;
     }
     .side-box {
       .other-game {
@@ -126,4 +134,6 @@ export default {
     }
   }
 }
+ 
+
 </style>

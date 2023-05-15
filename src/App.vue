@@ -1,8 +1,10 @@
 <template>
   <div id="app">
-    <SideMenu @otherSports="()=>{ showSetting = true }"></SideMenu>
-    <router-view @gameListPopup="() => { showAllGame = true }"></router-view>
-    <GameListPopup v-if="showAllGame" @close="() => { showAllGame = false }"></GameListPopup>
+    <div id="content-area">
+      <SideMenu @otherSports="()=>{ showSetting = true }"></SideMenu>
+      <router-view @gameListPopup="() => { showAllGame = true }"></router-view>
+      <GameListPopup v-if="showAllGame" @close="() => { showAllGame = false }"></GameListPopup>
+    </div>
   </div>
 </template>
 
@@ -41,12 +43,4 @@ export default {
 
 <style lang="scss">
 @import url('./style/main.scss');
-#app {
-  position: absolute;
-  top: 0;
-  overflow: hidden  ;
-  // background-color: antiquewhite;
-  box-sizing: border-box;
-  padding-left: 118px; // indicator
-}
 </style>

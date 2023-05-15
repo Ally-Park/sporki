@@ -1,31 +1,23 @@
-// A형 : 1168*621 / B형 : 1818*720 / C형 : 1816*900
+/** A형 : 1168*621 / B형 : 1818*720 / C형 : 1816*900 */
 
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap'); // temp
 @mixin aSize {
 
 }
-
-
-@media screen and (max-width: 1818px) {
-  #app {
-    width: 1818px;
-    height: 720px;
-    background-image: url("~@/images/bg/BG_basic.png");
-    color: white;
-  }
-  .snb {
-    width: 330px;
-  }
+#app {
+  font-family: "Noto Sans KR";
+  width: 1818px;
+  height: 900px;
+  padding-top: 90px;
+  background-color: #05060b;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden  ;
+  box-sizing: border-box;
 }
-
-@media screen and (min-width: 1818px) {
-  #app {
-    width: 1818px;
-    height: 900px;
-    background-image: url("~@/images/bg/BG.png");
-    color: white;
-  }
-  .snb {
-    width: 360px;
-  }
+#content-area {
+  width: 1816px;
+  height: 810px;
 }

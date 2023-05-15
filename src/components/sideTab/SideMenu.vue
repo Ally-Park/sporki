@@ -1,10 +1,19 @@
 <template>
   <div class="side-menu">
-    <div class="current-sport">야구</div>
+    <div class="current-sport">
+      <span>{{ '야구' }}</span>
+      <img src="../../images/drop.png">
+    </div>
     <ul>
-      <li id="live" @click="onClick('live', $event)">생중계</li>
-      <li id="schedule" @click="onClick('schedule', $event)">일정</li>
-      <li id="vod" @click="onClick('vod',  $event)">영상</li>
+      <li id="live" @click="onClick('live', $event)">
+        <p>생중계</p>
+      </li>
+      <li id="schedule" @click="onClick('schedule', $event)">
+        <p>일정</p>
+      </li>
+      <li id="vod" @click="onClick('vod',  $event)">
+        <p>영상</p>
+      </li>
     </ul>
   </div>
 </template>
@@ -45,6 +54,7 @@ export default {
           break
         case 'schedule':
           // 일정 page
+          this.$router.push('/schedule').catch(() => {})
           break
         case 'vod':
           // 영상 page
@@ -98,28 +108,60 @@ export default {
 
 <style lang="scss" scoped>
 .side-menu {
-  width: 360px;
-  // height: 720px;
+  font-weight: bold;
+  width: 410px;
   height: 100%;
   float: left;
-  background-color: #191a20;
+  padding-top: 40px;
+  // padding-left: 30px;
+  box-sizing: border-box;
   font-size: 20px;
   text-align: center;
-
+  // border: 1px solid darkcyan;
   .current-sport {
+    width: 340px;
     font-size: 40px;
     height: 100px;
+    margin-left: 30px;
+    border-radius: 8px;
+    border: solid 2px rgba(255, 255, 255, 0.1);
+    background-image: linear-gradient(#3e3a35, #060b12), linear-gradient(#3e3a35, #060b12);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    display: flex;
+    align-items: center;
+    span {
+      /** TODO: gap 속성 사용 여부 검토 */
+      margin-left: 21px;
+      margin-right: 162px;
+    }
+    img {
+      width: 40px;
+      height: 40px;
+    }
   }
 
   li {
+    position: relative;
     font-size: 40px;
+    opacity: 0.4;
     text-align: center;
-    height: 150px;
-    // border: 1px solid;
+    height: 130px;
+    margin-top: 30px;
+    font-weight: normal;
+    font-stretch: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   li.active {
-    border: 3px solid yellowgreen;
+    // border: 3px solid yellowgreen;
+    opacity: 0.8;
+    border-width: 2px;
+    border-image-source: linear-gradient(to right, rgba(240, 215, 187, 0) 1%, #f0d7bb 48%, rgba(240, 215, 187, 0) 94%);
+    border-image-slice: 1;
+    background-image: linear-gradient(to right, rgba(141, 116, 86, 0) 0%, rgba(141, 116, 86, 0.7) 49%, rgba(141, 116, 86, 0.7) 57%, rgba(141, 116, 86, 0) 100%);
   }
 
   button {
