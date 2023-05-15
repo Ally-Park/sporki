@@ -12,15 +12,27 @@
       </div>
       <div class="aside-section">
         <button class="game-detail-btn">경기 상세 정보</button>
-        <div>
+        <div class="game-score">
           <p>{{ '경기 전'}}</p>
-
+          <div class="score-board">
+            <div class="team">
+              <p>{{ '9' }}</p>
+              <p>{{ 'LG' }}</p>
+            </div>
+            <span>-</span>
+            <div class="team">
+              <p>{{ '1' }}</p>
+              <p>{{ '두산' }}</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="other-game-content">
       경기 목록
+      <div class="other-game-card" v-for="(i, k) in 5" :key="k"></div>
     </div>
+    <button class="top-btn">맨 위로</button>
     </Scroll>
 </div>
 </template>
@@ -36,6 +48,12 @@ export default {
       time: 'HH:MM:SS',
       gameStatus: 0
     }
+  },
+  created () {
+    // TODO: check current game schedule, setInterval
+    this.$nextTick(() => {
+      this.$refs.scroll.scrollUpdate()
+    })
   }
 }
 </script>
@@ -75,7 +93,34 @@ export default {
         color: white;
         border: 1px solid darkcyan;
       }
+      .game-score {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .score-board {
+          display: flex;
+          align-items: center;
+          .team {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+          }
+        }
+      }
     }
+  }
+  .other-game-content {
+    // display: flex;
+    width: 100%;
+    .other-game-card {
+      width: 90%;
+      height: 100px;
+      border: 1px solid hotpink
+    }
+  }
+  .top-btn {
+    color: white;
+    margin-bottom: 100px;
   }
 }
 </style>

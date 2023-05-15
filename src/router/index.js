@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LivePage from '../views/LivePage.vue'
 import LiveDetail from '../views/LiveDetail.vue'
+import SchedulePage from  '../views/SchedulePage.vue'
 import ThemePage from '../views/ThemePage.vue'
 import SportsHome from '../views/SportsHome'
 
@@ -25,6 +26,11 @@ const routes = [
     path: '/liveDetail',
     name: 'liveDetail',
     component: LiveDetail
+  },
+  {
+    path: '/schedule',
+    name: 'schedule',
+    component:SchedulePage
   },
   {
     path: '/theme',

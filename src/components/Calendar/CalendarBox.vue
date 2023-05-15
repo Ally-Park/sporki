@@ -46,7 +46,7 @@ export default {
     ])
   },
   async created () {
-    this.currentGame = this[types.GET_CURRENT_SPORTS].sportsCodeValue
+    this.currentGame = this[types.GET_CURRENT_SPORTS]
     const today = new Date()
 
     this.selectedDate[0] = today.getFullYear()
