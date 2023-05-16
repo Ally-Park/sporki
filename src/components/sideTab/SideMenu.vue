@@ -1,6 +1,6 @@
 <template>
   <div class="side-menu">
-    <div class="current-sport">
+    <div class="current-sport" @click="onClickSettingPopup">
       <span>{{ '야구' }}</span>
       <img src="../../images/drop.png">
     </div>
@@ -62,6 +62,8 @@ export default {
         default:
           break
       }
+    },
+    onClickSettingPopup () {
     },
     // onClickItem (item, event) {
     //   this.resetEffect()

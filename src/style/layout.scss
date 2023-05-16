@@ -2,22 +2,29 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap'); // temp
 @mixin aSize {
-
 }
+#appWrapper {
+  width: 1920px;
+  height: 1080px;
+}
+
 #app {
   font-family: "Noto Sans KR";
-  width: 1818px;
-  height: 900px;
+  width: 1920px;
+  height: 1080px;
   padding-top: 90px;
+  padding-left: 102px;
+  box-sizing: border-box;
   background-color: #05060b;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden  ;
-  box-sizing: border-box;
+  overflow: hidden;
 }
 #content-area {
+  position: relative;
   width: 1816px;
   height: 810px;
+  box-sizing: border-box;
 }

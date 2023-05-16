@@ -1,9 +1,12 @@
 <template>
-  <div id="app">
-    <div id="content-area">
-      <SideMenu @otherSports="()=>{ showSetting = true }"></SideMenu>
-      <router-view @gameListPopup="() => { showAllGame = true }"></router-view>
-      <GameListPopup v-if="showAllGame" @close="() => { showAllGame = false }"></GameListPopup>
+  <div id="appWrapper">
+    <div id="app">
+      <div id="content-area">
+        <SideMenu @otherSports="()=>{ showSetting = true }"></SideMenu>
+        <router-view @gameListPopup="() => { showAllGame = true }"></router-view>
+        <GameListPopup v-if="showAllGame" @close="() => { showAllGame = false }"></GameListPopup>
+        <SportsSetting v-if="showSetting" @click="() => { showSetting = false}"></SportsSetting>
+      </div>
     </div>
   </div>
 </template>
@@ -11,6 +14,7 @@
 <script>
 import SideMenu from '@/components/sideTab/SideMenu.vue'
 import GameListPopup from './components/popup/GameListPopup.vue'
+import SportsSetting from './components/popup/SportsSetting.vue'
 // import * as types  from '@/store/storeTypes'
 // import $apis from '@/apis' 
 // import Game from '@/js/Game'
@@ -19,11 +23,12 @@ import GameListPopup from './components/popup/GameListPopup.vue'
 export default {
   components: {
     SideMenu,
-    GameListPopup
+    GameListPopup,
+    SportsSetting
   },
   data () {
     return {
-      showSetting: true,
+      showSetting: false,
       showAllGame: false
     }
   },

@@ -1,47 +1,80 @@
 <template>
-    <div id="target-root" class="sports-setting">
-      <Scroll :horizontal="true" ref="scroll" id="target-scroll">      
-        <div class="sports-card-container">
-          <div class="sport-card">Sporki</div>
-          <div class="sport-card" v-for="sport in sports" :key="sport.code" @click="onClickSport(sport)">
-            {{ sport.name }}
-            <div v-for="league in sport.league" :key="league.code"> {{ league.name }}</div>
-          </div>
+    <div class="sports-setting">
+      <div class="header">
+        <img src="@/images/close.png" @click="onClickButton('cancel')">
+        <p>종목 선택</p>
+      </div>
+      <div class="sports-card-container">
+        <div class="sports-card" @click="onClick('sporki', $event)">
+          <div class="sporki"></div>
+          <p>스포키 LIVE</p>
         </div>
-      </Scroll>
+        <div class="sports-card" @click="onClick('kbaseball', $event)">
+          <div class="kbaseball"></div>
+          <p>야구</p>
+        </div>
+        <div class="sports-card" @click="onClick('wfootball', $event)">
+          <div class="wfootball"></div>
+          <p>해외 축구</p>
+        </div>
+        <div class="sports-card"  @click="onClick('volleyball', $event)">
+          <div class="volleyball"></div>
+          <p>배구</p>
+        </div>
+        <div class="sports-card" @click="onClick('billiards', $event)">
+          <div class="billiards"></div>
+          <p>당구</p>
+        </div>
+      </div>
+      <div class="footer">
+        <button @click="onClickButton('ok')">확인</button>
+        <button @click="onClickButton('cancel')">취소</button>
+      </div>
     </div>
   </template>
   
   <script>
-  import Scroll from '../../components/scroll/ScrollComponent.vue'
-  import SportsItem from '../../sports/SportItems'
   import * as types  from '@/store/storeTypes'
 
   export default {
-    components: {
-      Scroll
+    async created () {
+      // TODO: current sport selected effect
     },
     data () {
       return {
-        sports: []
+        selectedSport: ''
       }
     },
-    async created () {
-      this.sports = await SportsItem.getSports()
-      console.log(this.sports)
-      this.$nextTick(() => {
-        this.$refs.scroll.scrollUpdate()
-      })
-    },
-    mounted () {
-      this.$nextTick(() => {
-        this.$refs.scroll.scrollUpdate()
-      })
-    },
     methods: {
-      onClickSport (sport) {
-        this.$store.commit(types.SET_CURRENT_SPORTS, sport)
-        this.$emit('click', sport)
+      // onClickSport (sport) {
+      //   this.$store.commit(types.SET_CURRENT_SPORTS, sport)
+      //   this.$emit('click', sport)
+      // },
+      onClick (sport, event) {
+        this.resetEffect()
+        event.currentTarget.classList.add('active')
+        const el = document.getElementsByClassName(sport)[0]
+        el.classList.add('active')
+      },
+      resetEffect () {
+        const el = document.getElementsByClassName('sports-card')
+        console.log(el)
+        for (let i of el) {
+          if (i.classList.contains('active')) {
+            i.classList.remove('active')
+            i.firstChild.classList.remove('active')
+          }
+        }
+      },
+      onClickButton (type) {
+        if (type === 'ok') {
+          // 확인
+          this.$store.commit(types.SET_CURRENT_SPORTS, this.selectedSport)
+          this.$emit('click')
+        } else {
+          // 취소
+          this.$emit('click')
+        }
       }
     }
   }
@@ -49,33 +82,115 @@
   
   <style lang="scss" scoped>
   .sports-setting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
-    display: inline-block;
-    .sports-card-container {
-      display: flex;
-      width: max-content;
-      height: fit-content;
-      margin-top: 60px;
-      padding: 0 50px 0 50px;
-    }
-    .sport-card {
+    background-color: #22252b;
+
+    .header {
       position: relative;
-      background-color: rgba(255, 235, 205, 0.141);
-      margin-right: 10px;
-      display: inline-flex;
-      flex-direction: column;
-      width: 450px;
-      height: 550px;
-      overflow: hidden;
-      font-size: 50px;
+      display: flex;
       align-items: center;
       justify-content: center;
+      height: 160px;
+      width: 1756px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
       img {
         position: absolute;
+        left: 30px;
+      }
+      p {
+        font-size: 46px;
+        font-weight: bold;
+      }
+    }
+    .sports-card-container {
+      display: flex;
+      justify-content: space-evenly;
+      gap: 25px;
+    }
+    .sports-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      width: 320px;
+      height: 369px;
+      border-radius: 16px;
+      border: 1px solid;
+      border-image-source: linear-gradient(to bottom, #373b3f 0%, rgba(55, 59, 63, 0) 100%);
+      border-image-slice: 1;
+      background-image: linear-gradient(to bottom, #1e1e1e, #1e1e1e), linear-gradient(to bottom, #373b3f 0%, rgba(55, 59, 63, 0) 100%);
+      background-origin: border-box;
+      background-clip: content-box, border-box;
+      box-sizing: border-box;
+
+      div {
+        margin-top: 78px;
         width: 100%;
-        height: 100%;
+        height: 120px;
+      }
+      p {
+        font-size: 38px;
+        font-weight: 500;
+        margin-bottom: 78px;
+      }
+      .sporki { 
+        background: url('~@/images/vector/spoky_normal.svg') no-repeat center;
+      }
+      .sporki.active {
+        background: url('~@/images/vector/spoky_press.svg') no-repeat center;
+      }
+      .kbaseball {
+        background: url('~@/images/vector/baseball_normal.svg') no-repeat center;
+      }
+      .kbaseball.active {
+        background: url('~@/images/vector/baseball_press.svg') no-repeat center;
+      }
+      .wfootball {
+        background: url('~@/images/vector/soccer_normal.svg') no-repeat center;
+      }
+      .wfootball.active {
+        background: url('~@/images/vector/soccer_press.svg') no-repeat center;
+      }
+      .volleyball {
+        background: url('~@/images/vector/volleyball_normal.svg') no-repeat center;
+      }
+      .volleyball.active {
+        background: url('~@/images/vector/volleyball_press.svg') no-repeat center;
+      }
+    }
+
+    .sports-card.active {
+      border: solid 3px rgba(240, 215, 187, 0.4);
+      background-image: linear-gradient(139deg, #3b3834 0%, #0c0d0e 100%);
+    }
+    
+    .footer {
+      display: flex;
+      gap: 40px;
+      margin-top: 60px;
+      button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 440px;
+        height: 120px;
+        border-radius: 16px;
+        background-color: #38393f;
+        font-size: 46px;
+        font-weight: bold;
+        color: #fff;
+      }
+      button:active {
+        opacity: 0.5;
       }
     }
   }

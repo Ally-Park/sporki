@@ -15,7 +15,6 @@ time, mark, audio, video {
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -47,4 +46,7 @@ button {
 	background: none;
 	border: none;
 	padding: 0 0 0 0;
+	background-color: #38393f;
+	color: #fff;
+	font-family: "Noto Sans KR";
 }

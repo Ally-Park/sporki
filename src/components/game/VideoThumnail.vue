@@ -5,7 +5,7 @@
         <img src="" />
         <p> {{ currentSport === 'kbaseball' ? thumnail.awayTeamName : thumnail.homeTeamName }}</p>
       </div>
-      <div>VS</div>
+      <span>VS</span>
       <div class="team">
         <img src="" />
         <p> {{ currentSport === 'kbaseball' ? thumnail.homeTeamName : thumnail.awayTeamName }}</p>
@@ -13,6 +13,7 @@
     </div>
     <button class="live-btn">
       <p>{{ getCurretStatus(thumnail.gameStatus.code) }}</p>
+      <img src="@/images/arrow.png">
     </button>
   </div>
 </template>
@@ -75,25 +76,52 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 1034px;
+  height: 582px;
+  background-color: rgba(0, 0, 0, 0.6);
   .content {
     display: flex;
+    gap: 60px;
     align-items: center;
+    span {
+      font-size: 50px;
+      font-weight: bold;
+    }
     .team {
       display: flex;
       flex-direction: column;
       align-items: center;
-      border: 1px solid salmon;
-      width: 200px;
-      height: 200px;
+      width: fit-content;
+      height: fit-content;
       img {
-        width: 100px;
-        height: 100px;
-        border: 1px solid bisque;
+        width: 160px;
+        height: 160px;
+       //  border: 1px solid bisque; // temp
+      }
+      
+      p {
+        margin-top: 10px;
+        font-size: 30px;
+        font-weight: bold;
+        // width: 1034px;
+        // height: 582px;
       }
     }
   }
   .live-btn {
-    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    width: 371px;
+    height: 90px;
+    border-radius: 16px;
+    img {
+      padding-top: 6px;
+    }
+  }
+  .live-btn:active {
+    opacity: 0.5;
   }
 }
 </style>

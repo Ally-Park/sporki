@@ -1,6 +1,6 @@
 <template>
   <div class="no-game">
-    <img src="../../images/spoki_icon.png">
+    <img src="../../images/sporki_icon.png">
     <p>오늘은 중계가 없어요.<br>일정을 확인해 주세요.</p>
   </div>
 </template>

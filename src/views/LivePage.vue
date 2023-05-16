@@ -122,9 +122,6 @@ export default {
         background-color: rgba(56, 57, 63, 0.2);
       }
     }
-    .thumnail {
-      width: fit-content;
-    }
     .side-box {
       .other-game {
         button {
