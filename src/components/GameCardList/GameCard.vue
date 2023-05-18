@@ -69,8 +69,7 @@ export default {
   width: 310px;
   height: 249px;
   border-radius: 16px;
-  border-style: solid;
-  border-width: 3px;
+  border: 3px solid;
   border-image-source: linear-gradient(to bottom, #373b3f 0%, rgba(55, 59, 63, 0) 100%);
   border-image-slice: 1;
   background-image: linear-gradient(to bottom, #1e1e1e, #1e1e1e), linear-gradient(to bottom, #373b3f 0%, rgba(55, 59, 63, 0) 100%);
@@ -82,7 +81,7 @@ export default {
     border: solid 3px rgba(240, 215, 187, 0.4);
     background-image: linear-gradient(to bottom, #3b3834, #0c0d0e);
     &::before {
-      content: '' '';
+      content: '';
       width: 160px;
       height: 4px;
       position: absolute;

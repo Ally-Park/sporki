@@ -104,9 +104,11 @@ export default {
     flex-direction: column;
     height: 100%;
     .title {
-      height: 140px;
+      height: 104px;
       display: flex;
-      align-items: center;
+      padding-top: 10px;
+      box-sizing: border-box;
+      // align-items: center;
       font-weight: bold;
       p {
         font-size: 50px;
@@ -127,22 +129,22 @@ export default {
   .side-box {
     display: flex;
     flex-direction: column;
-      .other-game {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 140px;
-        span {
-          font-size: 40px;
-          font-weight: bold;
-        }
-        button {
-          width: 80px;
-          height: 80px;
-          color: white;
-        }
+    .other-game {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 140px;
+      span {
+        font-size: 40px;
+        font-weight: bold;
+      }
+      button {
+        width: 80px;
+        height: 80px;
+        color: white;
       }
     }
+  }
 }
  
 

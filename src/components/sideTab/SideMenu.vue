@@ -96,7 +96,7 @@ export default {
   width: 410px;
   height: 100%;
   float: left;
-  padding-top: 40px;
+  // padding-top: 40px;
   // padding-left: 30px;
   box-sizing: border-box;
   font-size: 20px;
