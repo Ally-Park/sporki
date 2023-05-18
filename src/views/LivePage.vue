@@ -76,7 +76,8 @@ export default {
           const games = todayGames.filter((game) => {
             return game.gameStatus.code !== 1 || game.gameStatus.code !== 2
           })
-          this.thumnailContent = games.shift()
+          // this.thumnailContent = games.shift()
+          this.thumnailContent = games[0]
           this.gameList = games
           this.isExistLiveSchedule = false
         }
@@ -122,14 +123,26 @@ export default {
         background-color: rgba(56, 57, 63, 0.2);
       }
     }
-    .side-box {
+  }
+  .side-box {
+    display: flex;
+    flex-direction: column;
       .other-game {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 140px;
+        span {
+          font-size: 40px;
+          font-weight: bold;
+        }
         button {
+          width: 80px;
+          height: 80px;
           color: white;
         }
       }
     }
-  }
 }
  
 

@@ -2,8 +2,11 @@
   <div class="game-card-list">
     <Scroll ref="scroll">
       <div class="game-card-container">
-        <!-- <div class="league-name">{{ game }}</div> -->
-        <GameCard v-for="(i, index) in games" :key="index" :game="i" @click="(seq) => { $emit('click', seq)}"></GameCard>
+        <GameCard v-for="(i, index) in games"
+          :key="index"  
+          :game="i"
+          :cardStyle="{'width': '310px', 'height': '291px'}"
+          @click="(seq) => { $emit('click', seq)}"></GameCard>
       </div>
     </Scroll>
   </div>
@@ -31,6 +34,10 @@ export default {
   async created () {
     this.$nextTick(() => {
       this.$refs.scroll.scrollUpdate()
+      const el = document.getElementsByClassName('game-card-container')
+      el[0].children[0].classList.add('sel')
+      el[0].children[0].children[1].style.display = 'block'
+      
     })
     console.log('[GameCardList.vue] created', this.games)
   }
@@ -39,7 +46,7 @@ export default {
 
 <style lang="scss" scoped>
 .game-card-list {
-  height: 600px;
+  height: 670px;
 }
 .game-card-container {
   display: flex;

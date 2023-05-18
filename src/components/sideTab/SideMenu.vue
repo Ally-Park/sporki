@@ -37,6 +37,10 @@ export default {
     // temp
     this.$store.commit(types.SET_CURRENT_SPORTS, 'kbaseball')
     this.$router.push('/live').catch(() => {})
+    this.$nextTick(() => {
+      const el = document.getElementById('live')    
+      el.classList.add('active')
+    })
   },
   mounted () {
   },
@@ -64,30 +68,8 @@ export default {
       }
     },
     onClickSettingPopup () {
+      this.$emit('otherSports')
     },
-    // onClickItem (item, event) {
-    //   this.resetEffect()
-    //   event.currentTarget.classList.add('active')
-    //   const selectedEl = document.getElementById(item.id)
-    //   selectedEl.children[1].classList.add('active')
-    //   this.$store.commit(types.SET_CURRENT_SPORTS, item.id)
-    //   this.$router.push('/game').catch(() => {})
-    // },
-    // onClick (type, id, event) {
-    //   this.resetEffect()
-    //   const el = document.getElementById(id)
-    //   el.classList.add('active')
-    //   event.currentTarget.classList.add('active')
-    //   this.$store.commit(types.SET_CURRENT_SPORTS, id)
-
-    //   if (type === 'game') {
-    //     // 경기 영상
-    //     this.$router.push('/game').catch(() => {})
-    //   } else {
-    //     // 테마영상
-    //     this.$router.push('/theme').catch(() => {})
-    //   }
-    // },
 
     resetEffect () {
       const li = document.getElementsByTagName('li')
@@ -154,16 +136,19 @@ export default {
     font-stretch: normal;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-left: 50px;
   }
 
   li.active {
+    background-image: url('~@/images/lnb-item-bg.png');
     // border: 3px solid yellowgreen;
-    opacity: 0.8;
-    border-width: 2px;
-    border-image-source: linear-gradient(to right, rgba(240, 215, 187, 0) 1%, #f0d7bb 48%, rgba(240, 215, 187, 0) 94%);
-    border-image-slice: 1;
-    background-image: linear-gradient(to right, rgba(141, 116, 86, 0) 0%, rgba(141, 116, 86, 0.7) 49%, rgba(141, 116, 86, 0.7) 57%, rgba(141, 116, 86, 0) 100%);
+    opacity: 1;
+    font-weight: bold;
+    // border-width: 2px;
+    // border-image-source: linear-gradient(to right, rgba(240, 215, 187, 0) 1%, #f0d7bb 48%, rgba(240, 215, 187, 0) 94%);
+    // border-image-slice: 1;
+    // background-image: linear-gradient(to right, rgba(141, 116, 86, 0) 0%, rgba(141, 116, 86, 0.7) 49%, rgba(141, 116, 86, 0.7) 57%, rgba(141, 116, 86, 0) 100%);
   }
 
   button {

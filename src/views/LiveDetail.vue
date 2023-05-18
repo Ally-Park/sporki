@@ -1,8 +1,7 @@
 <template>
 <div class="live-detail-page">
-  <Scroll ref="scroll">
-    <p>경기 화면</p>
     <div class="current-game-content">
+      <p>경기 화면</p>
       <div class="player">
         <div class="overlay" v-if="gameStatus === 0">
           <p class="time">{{ time }}</p>
@@ -28,12 +27,14 @@
         </div>
       </div>
     </div>
+    <button>경기 목록</button>
     <div class="other-game-content">
-      경기 목록
-      <div class="other-game-card" v-for="(i, k) in 5" :key="k"></div>
+      <Scroll ref="scroll">
+        <p>경기 목록</p>
+        <div class="other-game-card" v-for="(i, k) in 5" :key="k"></div>
+        <button class="top-btn">맨 위로</button>
+      </Scroll>
     </div>
-    <button class="top-btn">맨 위로</button>
-    </Scroll>
 </div>
 </template>
 
@@ -54,12 +55,16 @@ export default {
     this.$nextTick(() => {
       this.$refs.scroll.scrollUpdate()
     })
+  },
+  methods: {
+
   }
 }
 </script>
 
 <style lang="scss" scoped>
 .live-detail-page {
+  position: relative;
   font-size: 30px;
   float: left;
   height: 100%;
@@ -110,8 +115,22 @@ export default {
     }
   }
   .other-game-content {
-    // display: flex;
-    width: 100%;
+    position: absolute;
+
+    .show {
+      animation: slide 1s ease-in  Alternate;
+      @keyframes slide {
+        from {
+          top: 100%;
+        }
+        to {
+          top: 0%;
+        }
+      }
+
+      width: 100%;
+      top: 0;
+    }
     .other-game-card {
       width: 90%;
       height: 100px;
