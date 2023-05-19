@@ -204,7 +204,8 @@ export default {
         width: 40px;
         height: 40px;
         margin-top: 4px;
-        background: url('~@/images/arrow.png'), no-repeat;
+        background: url('~@/images/arrow_right.png'), no-repeat;
+        background-size: contain; 
       }
       
       .game-score {

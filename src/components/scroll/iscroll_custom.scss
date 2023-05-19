@@ -1,0 +1,85 @@
+/* 스크롤바 두께 */
+// $scrollbar-thickness: 10px;
+$scrollbar-thickness: 6px;
+/* 스크롤바의 모서리의 radius 값 */
+$scrollbar-border-radius: 999px;
+/* 스크롤바와 앱과 엣지면(수직 스크롤일 경우 오른쪽, 수평일 경우 아래쪽)과의 간격 */
+$scroll-edge-space: 4px;
+// $scroll-edge-space: 6px;
+/* 스크롤 바 방향으로 마진 정의 */
+$scroll-margin: 0px;
+/* 수평과 수직 스크롤이 모두 보일 때 두 스크롤이 크로스 되는 지점의 간격 */
+$scroll-both-space: 11px;
+/* 스크롤바 색상 */
+// $scrollbar-color: rgba(#FFFFFF, 0.2);
+$scrollbar-color: rgba(#ddd, 0.2);
+/* 인디케이터 두께 */
+// $indicator-thickness: 14px;
+$indicator-thickness: 5px;
+/* 인디케이터 색상 */
+// $indicator-color: rgba(#312f2d, 1);
+$indicator-color: linear-gradient(343deg, #ab864f 136%, #fbf2df -22%);
+/* 인디케이터가 스크롤바보다 두께가 두께울 때 위치 조정 값 */
+$scroll-overflow-position: abs($scrollbar-thickness - $indicator-thickness) / 2;
+
+#iScrollScrollbar {
+  box-sizing: border-box;
+  position: absolute;
+  z-index: 9999;
+  /* 중요 */
+  overflow: visible !important;
+}
+
+/* Styled scrollbars */
+.iScrollHorizontalScrollbar {
+	@extend #iScrollScrollbar;
+	left: $scroll-margin;
+	right: $scroll-margin;
+	bottom: $scroll-edge-space;
+
+  background-color: $scrollbar-color;
+  // mask-image: linear-gradient(0deg, transparent 0%, black 3%, black 97%, transparent 100%);
+}
+
+.iScrollHorizontalScrollbar.iScrollBothScrollbars {
+	right: $scroll-both-space;
+}
+
+.iScrollVerticalScrollbar {
+	@extend #iScrollScrollbar;
+	width: $scrollbar-thickness;
+	bottom: $scroll-margin;
+	top: $scroll-margin;
+	right: $scroll-edge-space;
+  background: $scrollbar-color;
+  border-radius: $scrollbar-border-radius;
+  // opacity: 0.2 !important;
+}
+
+.iScrollVerticalScrollbar.iScrollBothScrollbars {
+	bottom: $scroll-both-space;
+}
+
+.iScrollIndicator {
+  position: absolute;
+  box-sizing: border-box;
+  background-color: $indicator-color;
+	// background: $indicator-color;
+	border-radius: $scrollbar-border-radius;
+}
+
+.iScrollHorizontalScrollbar .iScrollIndicator {
+  height: $indicator-thickness;
+  // -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 50%, transparent 100%);
+  // bottom: $scroll-overflow-position * -1;
+}
+
+.iScrollVerticalScrollbar .iScrollIndicator {
+  // mask-image: linear-gradient(343deg, #ab864f 136%, #fbf2df -22%);
+  width: $indicator-thickness;
+  // height: 100px !important;
+  border-radius: 999px !important;
+  background: linear-gradient(343deg, #ab864f 136%, #fbf2df -22%);
+  // right: $scroll-overflow-position * -1;
+}
+

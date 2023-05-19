@@ -2,12 +2,14 @@
 <template>
   <div class="calender">
     <div class="year-box">
-      <button @click="onClickChangeMonth('prev')">&lt;</button>
+      <button class="previous-btn" @click="onClickChangeMonth('prev')"></button>
       <span>{{ selectedDate[0] }}년 {{ selectedDate[1] }}월</span>
-      <button @click="onClickChangeMonth('next')" >&gt;</button>
+      <button class="next-btn" @click="onClickChangeMonth('next')" ></button>
+      <button class="calender-btn"></button>
+      <button class="league-btn">{{ 'KBO' }}</button>
     </div>
-    <div class="wrapper">
-      <Flicking ref="flick"  :options="{ circular: false, autoResize: true }">
+    <div class="flick-wrapper">
+      <Flicking ref="flick" :options="{ circular: false, autoResize: true }">
         <div v-for="(i, index) in dateArray"
           :key="index"
           class="flicking-panel date-box"
@@ -186,21 +188,45 @@ export default {
 
 <style lang="scss">
 .date-box {
+  position: relative;
   display: flex;
   flex-direction: column;
-  width: 50px;
-  height: 50px;
+  width: 95px;
+  height: 140px;
   align-items: center;
   justify-content: center;
   color: white;
+  margin-right: 29px;
   .day {
     width: inherit;
     text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .date {
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 1;
   }
 }
 
-.date-box.selected {
-  border: 2px solid salmon;
+.date-box.selected::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  border-radius: 8px;
+  border-style: solid;
+  border-width: 3px;
+  border-image-source: linear-gradient(6deg, #f5e0c0 -295%, #ddaa5f 374%);
+  border-image-slice: 1;
+  background-image: linear-gradient(to top, #4d4543, #8b847f), linear-gradient(6deg, #f5e0c0 -295%, #ddaa5f 374%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  z-index: -1;
 }
 .date-box.not-game {
   color: gray !important;
@@ -215,11 +241,53 @@ export default {
 .calender {
   .year-box {
     display: flex;
-    justify-content: center;
-    button {
-      font-size: 30px;
-      color: white;
+    align-items: center;
+    height: 70px;
+    span {
+      font-size: 50px;
+      font-weight: bold;
+      line-height: 1;
+      letter-spacing: -1px;
+      margin: 0 30px;
     }
+
+    .previous-btn {
+      width: 60px;
+      height: 60px;
+      background: url('~@/images/arrow_left.png') no-repeat;
+      background-size: contain;
+    }
+
+    .next-btn {
+      width: 60px;
+      height: 60px;
+      background: url('~@/images/arrow_right.png') no-repeat;
+      background-size: contain;
+    }
+    
+    .calender-btn {
+      width: 70px;
+      height: 70px;
+      border-radius: 8px;
+      border: solid 2px rgba(255, 255, 255, 0.1);
+      background-color: #38393f;
+    }
+
+    .league-btn {
+      width: 166px;
+      height: 70px;
+      border-radius: 8px;
+      border: solid 2px rgba(255, 255, 255, 0.1);
+      background-color: rgba(56, 57, 63, 0.2);
+      font-size: 30px;
+      font-weight: bold;
+      margin-left: 648px;
+    }
+  }
+  .flick-wrapper {
+    height: 140px;
+    margin-top: 30px;
+    margin-bottom: 26px;
   }
 }
 

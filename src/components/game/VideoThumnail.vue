@@ -13,7 +13,7 @@
     </div>
     <button class="live-btn">
       <p>{{ getCurretStatus(thumnail.gameStatus.code) }}</p>
-      <img src="@/images/arrow.png">
+      <img src="@/images/arrow_right.png">
     </button>
   </div>
 </template>
@@ -117,6 +117,8 @@ export default {
     height: 90px;
     border-radius: 16px;
     img {
+      width: 40px;
+      height: 40px;
       padding-top: 6px;
     }
   }

@@ -130,7 +130,7 @@ export default {
     font-size: 40px;
     opacity: 0.4;
     text-align: center;
-    height: 130px;
+    height: 100px;
     margin-top: 30px;
     font-weight: normal;
     font-stretch: normal;
@@ -141,10 +141,11 @@ export default {
   }
 
   li.active {
-    background-image: url('~@/images/lnb-item-bg.png');
+    background: url('~@/images/lnb-item-bg.png') no-repeat;
     // border: 3px solid yellowgreen;
     opacity: 1;
     font-weight: bold;
+    
     // border-width: 2px;
     // border-image-source: linear-gradient(to right, rgba(240, 215, 187, 0) 1%, #f0d7bb 48%, rgba(240, 215, 187, 0) 94%);
     // border-image-slice: 1;

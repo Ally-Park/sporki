@@ -203,4 +203,29 @@ export default {
 
   
 }
+
+.game-card.schedule-card {
+  position: relative;
+  border: none;
+  background: none;
+  margin-bottom: 26px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.8;
+    background-color: #22252b;
+    border-radius: 16px;
+    // border-style: solid;
+    // border-width: 2px;
+    // border-image-source: linear-gradient(to bottom, #7c848c 0%, rgba(55, 59, 63, 0) 100%);
+    // border-image-slice: 1;
+    // background-image: linear-gradient(135deg, #252628 0%, #0c0d0e 100%), linear-gradient(to bottom, #7c848c 0%, rgba(55, 59, 63, 0) 100%);
+    // background-origin: border-box;
+    // background-clip: content-box, border-box;
+    // border-radius: 14px;
+  }
+}
 </style>

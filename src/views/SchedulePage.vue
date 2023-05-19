@@ -1,12 +1,18 @@
 <template>
   <div class="schedule-page">
-    schedule
-    <div>{{ 'KBO' }}</div>
-    <CalendarBox></CalendarBox>
+    <!-- schedule
+    <div>{{ 'KBO' }}</div> -->
+    <CalendarBox @click="onClickDate"></CalendarBox>
     <div class="game-card-section">
       <Scroll ref="scroll">
         <div class="card-container">    
-          <GameCard v-for="game in gameList" :key="game.seq" :game="game"></GameCard>
+          <GameCard
+            v-for="game in gameList"
+            :key="game.seq"
+            :game="game"
+            :styleType="'schedule-card'"
+            :cardSize="{'width': '310px', 'height': '310px'}">
+          </GameCard>
         </div>
       </Scroll>
     </div>
@@ -45,6 +51,11 @@ export default {
     this.$nextTick(() => {
       this.$refs.scroll.scrollUpdate()
     })
+  },
+  methods: {
+    onClickDate (date) {
+      console.log(date)
+    }
   }
 }
 </script>
@@ -59,6 +70,7 @@ export default {
     height: 500px; // TODO change
     .card-container {
       display: flex;
+      gap: 30px;
       flex-wrap: wrap
     }
   }

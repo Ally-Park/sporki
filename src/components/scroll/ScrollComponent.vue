@@ -8,6 +8,7 @@
 
 <script>
 import IScroll from "iscroll";
+import './iscroll_custom.scss'
 // import '../js/utils/iscroll-probe'
 
 export default {
@@ -47,7 +48,7 @@ export default {
       mouseWheel: false,
       scrollX: isHorizontal,
       scrollY: !isHorizontal,
-      scrollbars: this.visible ? "custom" : false,
+      scrollbars:"custom",
       fadeScrollbars: true,
       interactiveScrollbars: false,
       click: false,
