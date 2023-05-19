@@ -5,7 +5,7 @@
         <GameCard v-for="(i, index) in games"
           :key="index"  
           :game="i"
-          :cardStyle="{'width': '310px', 'height': '291px'}"
+          :cardSize="{'width': '310px', 'height': '291px'}"
           @click="(seq) => { $emit('click', seq)}"></GameCard>
       </div>
     </Scroll>

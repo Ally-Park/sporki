@@ -1,18 +1,21 @@
 <template>
   <div class="game-card" @click="$emit('click', game.seq )" 
     :id="`game-${game.seq}`"
-    :style="{'width': cardStyle.width, 'height': cardStyle.height}">
+    :style="{'width': cardSize.width, 'height': cardSize.height}"
+    :class="styleType">
     <div class="card-box">
       <div class="league-name">{{ game.leagueCodeName }}</div>
-      <div class="game-status">{{ gameStateText(game) }}</div>
+      <div class="game-status" :class="{'playing': game.gameStatus.code === 2 }">{{ gameStateText(game) }}</div>
       <div class="tema-box" v-if="game.sportsCodeValue === 'kbaseball'">
         <div class="team">
-          <img :src="game.sportsCodeValue === 'kbaseball' ? game.awayTeamLogoPath : game.homeTeamLogoPath" />
+          <img />
+          <!-- <img :src="game.sportsCodeValue === 'kbaseball' ? game.awayTeamLogoPath : game.homeTeamLogoPath" /> -->
           <span>{{ game.sportsCodeValue === 'kbaseball' ? game.awayTeamName : game.homeTeamName }}</span>
           <span v-if="game.gameStatus === 2">1</span>
         </div>
         <div class="team">
-          <img :src="game.sportsCodeValue === 'kbaseball' ? game.awayTeamLogoPath : game.homeTeamLogoPath" />
+          <img />
+          <!-- <img :src="game.sportsCodeValue === 'kbaseball' ? game.awayTeamLogoPath : game.homeTeamLogoPath" /> -->
           <span>{{ game.sportsCodeValue === 'kbaseball' ? game.homeTeamName : game.awayTeamName }}</span>
           <span v-if="game.gameStatus === 2">2</span>
         </div>
@@ -34,9 +37,13 @@ export default {
       type: Object,
       default: () => {}
     },
-    cardStyle: {
+    cardSize: {
       type: Object,
       default: () => {}
+    },
+    styleType: {
+      type: String,
+      default: ''
     }
   },
   methods: {
@@ -53,6 +60,8 @@ export default {
             // 경기 중
             return game.inning + '회' + game.topBottonType.name // ex 1회초
           }
+        default:
+          break
       }
     }
   }
@@ -115,6 +124,7 @@ export default {
   }
 
   .card-box {
+    position: relative;
     margin-top: 33px;
     margin-left: 30px;
 
@@ -140,20 +150,57 @@ export default {
         margin-bottom: 12px;
       }
       img {
-        width: 40px;
-        height: 40px;
+        width: 60px;
+        height: 60px;
         margin-right: 40px;
       }
       span {
         font-size: 30px;
         font-weight: bold;
-        letter-spacing: -1;
+        letter-spacing: -1px;
       }
       
     }
   }
+}
 
- 
+.game-card.list-popup-card {
+  position: relative;
+  border: none;
+  background: none;
+  margin-bottom: 26px;
 
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    border-style: solid;
+    border-width: 2px;
+    border-image-source: linear-gradient(to bottom, #7c848c 0%, rgba(55, 59, 63, 0) 100%);
+    border-image-slice: 1;
+    background-image: linear-gradient(135deg, #252628 0%, #0c0d0e 100%), linear-gradient(to bottom, #7c848c 0%, rgba(55, 59, 63, 0) 100%);
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border-radius: 14px;
+  }
+
+  .game-status {
+    opacity: 0.4;
+  }
+  .game-status.playing {
+    color: #d5bda8;
+  }
+
+  .card-box {
+    .league-name {
+      font-family: 'Noto Sans KR';
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+
+  
 }
 </style>

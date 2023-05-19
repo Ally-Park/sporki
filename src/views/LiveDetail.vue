@@ -171,7 +171,7 @@ export default {
         justify-content: center;
         font-size: 40px;
         font-weight: 500;
-        letter-spacing: -1;
+        letter-spacing: -1px;
     
         // border-image-source: linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
         border-image-source: linear-gradient(to bottom, #373b3f 0%, rgba(55, 59, 63, 0) 100%);
@@ -239,7 +239,7 @@ export default {
           margin-top: 50px;
           font-size: 42px;
           font-weight: bold;
-          letter-spacing: -1;
+          letter-spacing: -1px;
           color: #d5bda8;
         }
         .score-board {
@@ -247,7 +247,7 @@ export default {
           align-items: center;
           font-size: 66px;
           font-weight: bold;
-          letter-spacing: -1;
+          letter-spacing: -1px;
           margin: 57px 0 57px 0;
           span {
             margin: 0 33px 0 33px;
