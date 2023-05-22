@@ -4,7 +4,7 @@
     <div>{{ 'KBO' }}</div> -->
     <CalendarBox @click="onClickDate"></CalendarBox>
     <div class="game-card-section">
-      <Scroll ref="scroll" v-if="gameExist">
+      <Scroll ref="scroll" v-if="gameExist" @scrollStart="onScrollStart">
         <div class="card-container">    
           <GameCard
             v-for="game in gameList"
@@ -17,6 +17,9 @@
       </Scroll>
       <div v-else class="no-game">
         <p>해당 날짜의 경기가 없어요.<br>다른 날짜를 선택해 주세요.</p>
+      </div>
+      <div class="floating-btn" v-if="showFloatingBtn" @click="moveTop">
+        <img src="../images/top.png" alt="">
       </div>
     </div>
   </div>
@@ -38,7 +41,8 @@ export default {
   data () {
     return {
       gameList: [],
-      gameExist: false
+      gameExist: false,
+      showFloatingBtn: false
     }
   },
   computed: {
@@ -66,6 +70,13 @@ export default {
         console.log('게임 없음~')
         this.gameExist = false
       }
+    },
+    onScrollStart () {
+      this.showFloatingBtn = true
+    },
+    moveTop () {
+      this.$refs.scroll.moveAt(0,0)
+      this.showFloatingBtn = false
     }
   }
 }
@@ -78,6 +89,7 @@ export default {
   width: 1360px;
   overflow: hidden;
   .game-card-section {
+    position: relative;
     height: 500px; 
     display: flex;
     justify-content: center;
@@ -96,6 +108,14 @@ export default {
       letter-spacing: -1px;
       box-sizing: border-box;
       padding-top: 130px;
+    }
+
+    .floating-btn {
+      position: absolute;
+      right: 30px;
+      bottom: 0;
+      width: 120px;
+      height: 120px;
     }
   }
 }
