@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LivePage from '../views/LivePage.vue'
-import LiveDetail from '../views/LiveDetail.vue'
+import LiveDetailPage from '../views/LiveDetailPage.vue'
 import SchedulePage from  '../views/SchedulePage.vue'
+import GameDetailPage from '../views/GameDetailPage.vue'
 import ThemePage from '../views/ThemePage.vue'
 import SportsHome from '../views/SportsHome'
 
@@ -25,12 +26,17 @@ const routes = [
   {
     path: '/liveDetail',
     name: 'liveDetail',
-    component: LiveDetail
+    component: LiveDetailPage
   },
   {
     path: '/schedule',
     name: 'schedule',
-    component:SchedulePage
+    component: SchedulePage
+  },
+  {
+    path: '/gameDetail',
+    name: 'gameDetail',
+    component: GameDetailPage
   },
   {
     path: '/theme',

@@ -13,7 +13,7 @@
       <div class="video-section" v-if="false">player</div>
     </div>
     <div class="aside-section">
-      <button class="game-detail-btn">경기 상세 정보</button>
+      <button class="game-detail-btn" @click="onClickGameDetail">경기 상세 정보</button>
       <div class="game-score">
         <p class="game-status">{{ '경기 전'}}</p>
         <div class="score-board">
@@ -120,7 +120,12 @@ export default {
           this.$refs.scroll.scrollUpdate()
         })
       }
-    } 
+    },
+    onClickGameDetail () {
+      console.log('go to 경기 상세 페이지')
+      this.$router.push('/gameDetail').catch(() => {})
+      // TODO: side menu 일정 탭 활성화
+    }
   }
 }
 </script>

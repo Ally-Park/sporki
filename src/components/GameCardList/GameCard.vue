@@ -48,20 +48,35 @@ export default {
   },
   methods: {
     onClick() {
-
     },
     gameStateText (game) {
       switch (game.sportsCodeValue) {
         case 'kbaseball':
-          if (game.gameStatus.code === 1) {
-            // 경기 전
-            return game.startTime.substring(0, 5) + ' 예정'
-          } else {
-            // 경기 중
-            return game.inning + '회' + game.topBottonType.name // ex 1회초
-          }
+          return this.baseballText(game)
+          // if (game.gameStatus.code === 1) {
+          //   // 경기 전
+          //   return game.startTime.substring(0, 5) + ' 예정'
+          // } else {
+          //   // 경기 중
+          //   return game.inning + '회' + game.topBottonType.name // ex 1회초
+          // }
         default:
           break
+      }
+    },
+    baseballText(game) {
+      switch (game.gameStatus.code) {
+        case 1:
+          // 경기 전
+          return game.startTime.substring(0, 5) + ' 예정'
+        case 2:
+          return game.inning + '회' + game.topBottonType.name // ex 1회초
+        case 3:
+          return '종료'
+        case 4:
+          return '취소'
+        default:
+          return ''
       }
     }
   }
@@ -226,6 +241,13 @@ export default {
     // background-origin: border-box;
     // background-clip: content-box, border-box;
     // border-radius: 14px;
+  }
+}
+
+
+.game-card.list-popup-card, .game-card.schedule-card  {
+  .game-status {
+    opacity: 0.2;
   }
 }
 </style>

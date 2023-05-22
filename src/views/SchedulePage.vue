@@ -4,7 +4,7 @@
     <div>{{ 'KBO' }}</div> -->
     <CalendarBox @click="onClickDate"></CalendarBox>
     <div class="game-card-section">
-      <Scroll ref="scroll">
+      <Scroll ref="scroll" v-if="gameExist">
         <div class="card-container">    
           <GameCard
             v-for="game in gameList"
@@ -15,6 +15,9 @@
           </GameCard>
         </div>
       </Scroll>
+      <div v-else class="no-game">
+        <p>해당 날짜의 경기가 없어요.<br>다른 날짜를 선택해 주세요.</p>
+      </div>
     </div>
   </div>
 </template>
@@ -35,6 +38,7 @@ export default {
   data () {
     return {
       gameList: [],
+      gameExist: false
     }
   },
   computed: {
@@ -48,13 +52,20 @@ export default {
     // 경기 시작 시간이 빠른 순으로 정렬
     console.log(this[types.GET_TODAY_GAME_LIST])
     this.gameList = this[types.GET_TODAY_GAME_LIST]
-    this.$nextTick(() => {
-      this.$refs.scroll.scrollUpdate()
-    })
   },
   methods: {
-    onClickDate (date) {
-      console.log(date)
+    onClickDate (gameList) {
+      console.log('onClickDate:: ', gameList)
+      if (gameList) {
+        this.gameExist = true
+        this.gameList = gameList
+        this.$nextTick(() => {
+          this.$refs.scroll.scrollUpdate()
+        })
+      } else {
+        console.log('게임 없음~')
+        this.gameExist = false
+      }
     }
   }
 }
@@ -64,14 +75,27 @@ export default {
 .schedule-page {
   float: left;
   height: 100%;
-  width: 1340px;
+  width: 1360px;
   overflow: hidden;
   .game-card-section {
-    height: 500px; // TODO change
+    height: 500px; 
+    display: flex;
+    justify-content: center;
+    // align-items: center;
+    
     .card-container {
       display: flex;
       gap: 30px;
       flex-wrap: wrap
+    }
+
+    .no-game {
+      font-size: 40px;
+      font-weight: 500;
+      line-height: 1.3;
+      letter-spacing: -1px;
+      box-sizing: border-box;
+      padding-top: 130px;
     }
   }
 }

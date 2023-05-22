@@ -10,7 +10,7 @@
     </div>
     <div class="flick-wrapper">
       <Flicking ref="flick" :options="{ circular: false, autoResize: true }">
-        <div v-for="(i, index) in dateArray"
+        <div v-for="(i, index) in scheduleArray"
           :key="index"
           class="flicking-panel date-box"
           :class="{'not-game': !i.isExistGame}"
@@ -36,10 +36,11 @@ export default {
     return {
       week: ['일', '월', '화', '수', '목', '금', '토'],
       day: 0,
-      dateArray: [],
+      // dateArray: [],
       selectedPannel: -1,
       currentGame: '',
-      selectedDate: [], // [0]: year, [1]: month, [2]: day
+      selectedDate: [], // [0]: year, [1]: month, [2]: day,
+      scheduleArray: []
     }
   },
   computed: {
@@ -59,11 +60,10 @@ export default {
   methods: {
     async setPannel (year, month, type) {
       let tmpArray = []
-      this.dateArray = []
       let gameSchedule = []
+      this.scheduleArray = []
       const response = await this.$apis.sports.getGameSchedule(this.currentGame, year, month)
       gameSchedule = response.gameSchedule
-
       for (let i = 0; i < gameSchedule.length; i++) {
         if (Number(gameSchedule[i].date.split('-')[0]) === this.selectedDate[0]) {
           // 같은 year
@@ -83,7 +83,7 @@ export default {
       }
       const last = new Date(year, month, 0).getDate()
       for (let i = 1; i <= last; i++) {
-        const dateObj = {
+        const schedule = {
           month: month,
           day: this.selectedDate[2] === i && type === 'init' 
             ? '오늘' 
@@ -91,15 +91,16 @@ export default {
           date: i
         }
         if (Number(gameSchedule[0].date.split('-')[2]) === i) {
-          dateObj.isExistGame = true
+          schedule.isExistGame = true
+          schedule.gameList = gameSchedule[0].gameList
           gameSchedule.shift()
         } else {
-          dateObj.isExistGame = false
+          schedule.isExistGame = false
         }
-        tmpArray.push(dateObj)
+        tmpArray.push(schedule)
       }
-      this.dateArray = tmpArray
-      console.log(this.dateArray)
+      this.scheduleArray = tmpArray
+
       this.$nextTick(() => {
         this.movePannel(type)
       })
@@ -110,24 +111,29 @@ export default {
       switch (type) {
         case 'init':
           pannel = this.selectedDate[2] -1
-          if (!this.dateArray[pannel].isExistGame) {
-            // 경기 없음
-            for (let i = pannel; i < this.dateArray.length; i++) {
-              if (this.dateArray[i].isExistGame) {
-                this.$refs.flick.moveTo(i)
-                const focus = this.$refs.flick.getPanel(i)
-                focus.element.classList.add('selected')
-                this.selectedPannel = i
-                break
-              }
-            }
-          } else {
-            this.$refs.flick.moveTo(pannel)
-            const focus = this.$refs.flick.getPanel(this.selectedDate[2]-1)
-            focus.element.classList.add('selected')
-            this.selectedPannel = pannel
-          }
-        break
+          this.$refs.flick.moveTo(pannel)
+          // const focus = this.$refs.flick.getPanel(this.selectedDate[2]-1)
+          this.$refs.flick.getPanel(this.selectedDate[2]-1).element.classList.add('selected')
+          this.selectedPannel = pannel
+          break
+        //   if (!this.dateArray[pannel].isExistGame) {
+        //     // 경기 없음
+        //     for (let i = pannel; i < this.dateArray.length; i++) {
+        //       if (this.dateArray[i].isExistGame) {
+        //         this.$refs.flick.moveTo(i)
+        //         const focus = this.$refs.flick.getPanel(i)
+        //         focus.element.classList.add('selected')
+        //         this.selectedPannel = i
+        //         break
+        //       }
+        //     }
+        //   } else {
+        //     this.$refs.flick.moveTo(pannel)
+        //     const focus = this.$refs.flick.getPanel(this.selectedDate[2]-1)
+        //     focus.element.classList.add('selected')
+        //     this.selectedPannel = pannel
+        //   }
+        // break
         case 'prev':
           for (let i = this.dateArray.length - 1; i > 0; i--) {
             if (this.dateArray[i].isExistGame) {
@@ -153,7 +159,8 @@ export default {
         default:
           break
       }
-      this.$emit('click', this.selectedDate)
+      // console.log(this.scheduleArray[this.selectedDate[2] - 1].gameList)
+      this.$emit('click', this.scheduleArray[this.selectedDate[2] - 1].gameList)
     },
     async onClickDate (index) {
       this.selectedDate[2] = index + 1
@@ -162,7 +169,8 @@ export default {
       selEl.classList.remove('selected')
       el.classList.add('selected')
       this.selectedPannel = index
-      this.$emit('click', this.selectedDate)
+      // console.log(this.scheduleArray[this.selectedDate[2] - 1].gameList)
+      this.$emit('click', this.scheduleArray[this.selectedDate[2] - 1].gameList)
       try {
         await this.$refs.flick.moveTo(index)
       } catch (e) {
