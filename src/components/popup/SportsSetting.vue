@@ -143,28 +143,28 @@
         margin-bottom: 78px;
       }
       .sporki { 
-        background: url('~@/images/vector/spoky_normal.svg') no-repeat center;
+        background: url('~@/images/svgs/spoky_normal.svg') no-repeat center;
       }
       .sporki.active {
-        background: url('~@/images/vector/spoky_press.svg') no-repeat center;
+        background: url('~@/images/svgs/spoky_press.svg') no-repeat center;
       }
       .kbaseball {
-        background: url('~@/images/vector/baseball_normal.svg') no-repeat center;
+        background: url('~@/images/svgs/baseball_normal.svg') no-repeat center;
       }
       .kbaseball.active {
-        background: url('~@/images/vector/baseball_press.svg') no-repeat center;
+        background: url('~@/images/svgs/baseball_press.svg') no-repeat center;
       }
       .wfootball {
-        background: url('~@/images/vector/soccer_normal.svg') no-repeat center;
+        background: url('~@/images/svgs/soccer_normal.svg') no-repeat center;
       }
       .wfootball.active {
-        background: url('~@/images/vector/soccer_press.svg') no-repeat center;
+        background: url('~@/images/svgs/soccer_press.svg') no-repeat center;
       }
       .volleyball {
-        background: url('~@/images/vector/volleyball_normal.svg') no-repeat center;
+        background: url('~@/images/svgs/volleyball_normal.svg') no-repeat center;
       }
       .volleyball.active {
-        background: url('~@/images/vector/volleyball_press.svg') no-repeat center;
+        background: url('~@/images/svgs/volleyball_press.svg') no-repeat center;
       }
     }
 

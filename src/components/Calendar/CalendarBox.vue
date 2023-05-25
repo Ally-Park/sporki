@@ -262,14 +262,14 @@ export default {
     .previous-btn {
       width: 60px;
       height: 60px;
-      background: url('~@/images/arrow_left.png') no-repeat;
+      background: url('~@/images/svgs/arrow_left.svg') no-repeat;
       background-size: contain;
     }
 
     .next-btn {
       width: 60px;
       height: 60px;
-      background: url('~@/images/arrow_right.png') no-repeat;
+      background: url('~@/images/svgs/arrow_right.svg') no-repeat;
       background-size: contain;
     }
     
