@@ -4,7 +4,7 @@ import LivePage from '../views/LivePage.vue'
 import LiveDetailPage from '../views/LiveDetailPage.vue'
 import SchedulePage from  '../views/SchedulePage.vue'
 import GameDetailPage from '../views/GameDetailPage.vue'
-import ThemePage from '../views/ThemePage.vue'
+import VodPage from '../views/VodPage'
 import SportsHome from '../views/SportsHome'
 
 Vue.use(VueRouter)
@@ -39,9 +39,9 @@ const routes = [
     component: GameDetailPage
   },
   {
-    path: '/theme',
-    name: 'theme',
-    component: ThemePage
+    path: '/vod',
+    name: 'vod',
+    component: VodPage
   }
 ]
 

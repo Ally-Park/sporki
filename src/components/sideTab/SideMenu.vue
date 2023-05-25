@@ -62,6 +62,7 @@ export default {
           break
         case 'vod':
           // 영상 page
+          this.$router.push('/vod').catch(() => {})
           break
         default:
           break
