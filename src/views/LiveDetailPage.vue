@@ -184,6 +184,7 @@ export default {
         background-image: linear-gradient(119deg, #252628 0%, #0c0d0e 100%), linear-gradient(to bottom, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.1) 100%);
         background-origin: border-box;
         background-clip: content-box, border-box;
+        box-sizing: border-box
       }
       .video-section {
       }
@@ -202,6 +203,7 @@ export default {
         background-image: linear-gradient(#3e3a35, #060b12), linear-gradient(#3e3a35, #060b12);
         background-origin: border-box;
         background-clip: content-box, border-box;
+        box-sizing: border-box;
         margin-bottom: 30px;
       }
       .game-detail-btn::after {
@@ -223,6 +225,7 @@ export default {
         border-radius: 16px;
         border: solid 3px rgba(240, 215, 187, 0.4);
         background-image: linear-gradient(150deg, #3b3834 0%, #0c0d0e 100%);
+        box-sizing: border-box;
         &::before {
           content: '';
           width: 160px;

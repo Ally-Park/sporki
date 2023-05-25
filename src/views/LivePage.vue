@@ -134,6 +134,7 @@ export default {
       align-items: center;
       justify-content: space-between;
       height: 140px;
+      width: 310px;
       span {
         font-size: 40px;
         font-weight: bold;

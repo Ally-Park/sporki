@@ -47,6 +47,7 @@ export default {
 <style lang="scss" scoped>
 .game-card-list {
   height: 670px;
+  width: 340px;
 }
 .game-card-container {
   display: flex;

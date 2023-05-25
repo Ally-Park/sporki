@@ -11,7 +11,9 @@
             :key="game.seq"
             :game="game"
             :styleType="'schedule-card'"
-            :cardSize="{'width': '310px', 'height': '310px'}">
+            :cardSize="{'width': '310px', 'height': '310px'}"
+            @click="onClickGameCard"
+            >
           </GameCard>
         </div>
       </Scroll>
@@ -70,6 +72,10 @@ export default {
         console.log('게임 없음~')
         this.gameExist = false
       }
+    },
+    onClickGameCard (seq) {
+      console.log('[SchedulePage.vue] onClickGameCard::seq::', seq)
+      this.$router.push('/gameDetail').catch(() => {})
     },
     onScrollStart () {
       this.showFloatingBtn = true
