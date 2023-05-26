@@ -1,10 +1,15 @@
 <template>
     <div class="vod-page">
-      <div class="type-button-container">
+      <div v-if="!showCalendar" class="type-button-container">
         <button @click="onClickButton('all', $event)">전체</button>
         <button @click="onClickButton('date', $event)">날짜별</button>
         <button @click="onClickButton('theme', $event)">테마별</button>
       </div>
+      <CalendarBox v-else 
+        :buttons="buttons"
+        :calendarType="'vod'"
+      >
+      </CalendarBox>
       <div class="vod-list-container">
         <Scroll ref="scroll"  @scrollStart="onScrollStart" @scrollTop="onScrollTop">
           <div class="vod-list-box">
@@ -23,16 +28,19 @@
   <script>
   import Scroll from '@/components/scroll/ScrollComponent.vue';
   import VodCard from '@/components/vod/VodCard.vue';
-  // import CalendarBox from '@/components/Calendar/CalendarBox.vue';
+  import CalendarBox from '@/components/Calendar/CalendarBox.vue';
   export default {
     components: {
       VodCard,
       Scroll,
+        CalendarBox,
       
     },
     data () {
       return {
-        showFloatingBtn: false
+        showFloatingBtn: false,
+        showCalendar: false,
+        buttons: ['전체', '날짜별', '테마별']
       }
     },
     created () {
@@ -44,17 +52,21 @@
     },
     methods: {
       onClickButton (type, event) {
-        const el = document.getElementsByClassName('type-button-container')[0].children
-        for(let i of el) {
-          if (i.classList.contains('selected')) {
-            i.classList.remove('selected')
+        this.$nextTick(() => {
+          const el = document.getElementsByClassName('type-button-container')[0].children
+          for(let i of el) {
+            if (i.classList.contains('selected')) {
+               i.classList.remove('selected')
+            }
           }
-        }
-        event.currentTarget.classList.add('selected')
+          event.currentTarget.classList.add('selected')
+        })
+       
         switch (type) {
           case 'all':
             break
           case 'date':
+            this.showCalendar = true
             break
           case 'theme':
             break

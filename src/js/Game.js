@@ -1,16 +1,16 @@
-class Game {
-  constructor (game) {
-    this.name = game.name
-    this.id = game.id
-    this.gameVideoExist = ''
-  }
+// class Game {
+//   constructor (game) {
+//     this.name = game.name
+//     this.id = game.id
+//     this.gameVideoExist = ''
+//   }
 
-  getPlayVideo () {
-  }
+//   getPlayVideo () {
+//   }
 
-  getThemeVideo () {
-  }
+//   getThemeVideo () {
+//   }
 
-}
+// }
 
-export default Game
+// export default Game

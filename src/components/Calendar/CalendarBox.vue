@@ -1,19 +1,29 @@
 
 <template>
-  <div class="calender">
+  <div class="calendar">
     <div class="year-box">
-      <button class="previous-btn" @click="onClickChangeMonth('prev')"></button>
-      <span>{{ selectedDate[0] }}년 {{ selectedDate[1] }}월</span>
-      <button class="next-btn" @click="onClickChangeMonth('next')" ></button>
-      <button class="calender-btn"></button>
-      <button class="league-btn">{{ 'KBO' }}</button>
+      <div class="year-month">
+        <button class="previous-btn" @click="onClickChangeMonth('prev')"></button>
+        <span>{{ selectedDate[0] }}년 {{ selectedDate[1] }}월</span>
+        <button class="next-btn" @click="onClickChangeMonth('next')"></button>
+        <button class="calendar-btn"></button>
+      </div>
+      <div class="btn-box">
+        <button 
+          :class="type"
+          v-for="(btn, index) in buttons" 
+          :key="index"
+          @click="onClickButton(type)"
+        >{{ btn }}
+      </button>
+      </div>
     </div>
     <div class="flick-wrapper">
       <Flicking ref="flick" :options="{ circular: false, autoResize: true }">
         <div v-for="(i, index) in scheduleArray"
           :key="index"
           class="flicking-panel date-box"
-          :class="{'not-game': !i.isExistGame}"
+          :class="[`${calendarType}`, {'not-game': !i.isExistGame}, {'today' : i.day === '오늘'}]"
           @click="onClickDate(index)">
           <div class="day">{{ i.day }}</div>
           <div class="date">{{ i.date }}</div>
@@ -43,10 +53,28 @@ export default {
       scheduleArray: []
     }
   },
+  props: {
+    buttons: {
+      types: Array,
+      default: () => []
+    },
+    calendarType: {
+      types: String,
+      default: ''
+    }
+  },
   computed: {
     ...mapGetters([
       types.GET_CURRENT_SPORTS
-    ])
+    ]),
+    type () {
+      if (this.calendarType === 'schedule') {
+        return 'league-btn'
+      } else {
+        // vod 
+        return 'vod-btn'
+      }
+    }
   },
   async created () {
     this.currentGame = this[types.GET_CURRENT_SPORTS]
@@ -67,7 +95,6 @@ export default {
       for (let i = 0; i < gameSchedule.length; i++) {
         if (Number(gameSchedule[i].date.split('-')[0]) === this.selectedDate[0]) {
           // 같은 year
-
           if (Number(gameSchedule[i].date.split('-')[1]) !== month) {
             gameSchedule.shift()
             i--
@@ -105,35 +132,15 @@ export default {
         this.movePannel(type)
       })
     },
-
     async movePannel (type) {
       let pannel = 0
       switch (type) {
         case 'init':
           pannel = this.selectedDate[2] -1
           this.$refs.flick.moveTo(pannel)
-          // const focus = this.$refs.flick.getPanel(this.selectedDate[2]-1)
           this.$refs.flick.getPanel(this.selectedDate[2]-1).element.classList.add('selected')
           this.selectedPannel = pannel
           break
-        //   if (!this.dateArray[pannel].isExistGame) {
-        //     // 경기 없음
-        //     for (let i = pannel; i < this.dateArray.length; i++) {
-        //       if (this.dateArray[i].isExistGame) {
-        //         this.$refs.flick.moveTo(i)
-        //         const focus = this.$refs.flick.getPanel(i)
-        //         focus.element.classList.add('selected')
-        //         this.selectedPannel = i
-        //         break
-        //       }
-        //     }
-        //   } else {
-        //     this.$refs.flick.moveTo(pannel)
-        //     const focus = this.$refs.flick.getPanel(this.selectedDate[2]-1)
-        //     focus.element.classList.add('selected')
-        //     this.selectedPannel = pannel
-        //   }
-        // break
         case 'prev':
           for (let i = this.dateArray.length - 1; i > 0; i--) {
             if (this.dateArray[i].isExistGame) {
@@ -159,7 +166,6 @@ export default {
         default:
           break
       }
-      // console.log(this.scheduleArray[this.selectedDate[2] - 1].gameList)
       this.$emit('click', this.scheduleArray[this.selectedDate[2] - 1].gameList)
     },
     async onClickDate (index) {
@@ -188,6 +194,14 @@ export default {
         // 다음달
         this.selectedDate[1]++
         await this.setPannel(this.selectedDate[0], this.selectedDate[1], 'next')
+      }
+    },
+    onClickButton (type) {
+      if (type === 'league-btn') {
+        // TODO: 리그 여러개인 경우 리그 팝업
+      } else {
+        // vod
+        // TODO: emit
       }
     }
   }
@@ -218,6 +232,9 @@ export default {
     font-weight: bold;
     line-height: 1;
   }
+  &.today {
+      color: #d5bda8;
+    }
 }
 
 .date-box.selected::after {
@@ -240,17 +257,38 @@ export default {
   color: gray !important;
 }
 
+.date-box.vod.selected::after {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0.4;
+  border-radius: 8px;
+  background-image: linear-gradient(to top, #4d4543, #8b847f);
+  border: none;
+}
 .flicking-camera {
   display: flex;
 }
 </style>
 
 <style lang="scss" scoped>
-.calender {
+.calendar {
   .year-box {
     display: flex;
     align-items: center;
     height: 70px;
+    justify-content: space-between;
+    .year-month {
+      display: flex;
+      align-items: center;
+    }
+    .btn-box {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 20px;
+      font-weight: normal;
+    }
     span {
       font-size: 50px;
       font-weight: bold;
@@ -273,12 +311,12 @@ export default {
       background-size: contain;
     }
     
-    .calender-btn {
+    .calendar-btn {
       width: 70px;
       height: 70px;
       border-radius: 8px;
       border: solid 2px rgba(255, 255, 255, 0.1);
-      background-color: #38393f;
+      background-color: #38393f; // TODO: image
     }
 
     .league-btn {
@@ -289,7 +327,21 @@ export default {
       background-color: rgba(56, 57, 63, 0.2);
       font-size: 30px;
       font-weight: bold;
-      margin-left: 648px;
+      // margin-left: 648px;
+    }
+
+    .vod-btn {
+      width: 166px;
+      height: 70px;
+      font-size: 30px;
+      font-weight: normal;
+      border: solid 2px rgba(255, 255, 255, 0.1);
+      background-color: #38393f;
+      border-radius: 8px;
+      color: rgba(255, 255, 255, 0.4);
+      &:nth-child(2) {
+        color: rgba(255, 255, 255, 1);
+      }
     }
   }
   .flick-wrapper {

@@ -2,7 +2,7 @@
   <div class="schedule-page">
     <!-- schedule
     <div>{{ 'KBO' }}</div> -->
-    <CalendarBox @click="onClickDate"></CalendarBox>
+    <CalendarBox @click="onClickDate" :buttons="buttons" :calendarType="'schedule'"></CalendarBox>
     <div class="game-card-section">
       <Scroll ref="scroll" v-if="gameExist" @scrollStart="onScrollStart">
         <div class="card-container">    
@@ -44,7 +44,8 @@ export default {
     return {
       gameList: [],
       gameExist: false,
-      showFloatingBtn: false
+      showFloatingBtn: false,
+      buttons: ['KBO'] // TODO
     }
   },
   computed: {
